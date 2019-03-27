@@ -14,7 +14,7 @@ services:
 
   client:
     build:
-      context: ./containers/client
+      context: ./containers/client/docker
     ports:
       - 3000:3000
     volumes:
