@@ -5,7 +5,7 @@ services:
     build:
       context: ./containers/nginx
     ports:
-      - 80:80
+      - ${HTTP_PORT}:80
     volumes:
       - ./containers/nginx:/etc/nginx/conf.d
     restart: always
@@ -16,13 +16,13 @@ services:
     build:
       context: ./containers/client/docker
     ports:
-      - 3000:3000
+      - ${CLIENT_PORT}:3000
     volumes:
       - ./containers/client:/usr/src/examin/client:cached
+    env_file:
+      - ./env/client.env
     tty: true
     stdin_open: true
-    environment:
-      BASE_URL: http://api:3000
     command: yarn start -p 3000 -b '0.0.0.0'
     depends_on:
       - api
@@ -31,14 +31,14 @@ services:
     build:
       context: ./containers/api
     ports:
-      - 3500:3000
+      - ${API_PORT}:3000
     volumes:
       - ./containers/api:/usr/src/examin/api:cached
     tty: true
     stdin_open: true
-    environment:
-      RAILS_ENV: production
-    command: bundle exec rails server -p 3000 -b '0.0.0.0'
+    env_file:
+      - ./env/api.env
+    command: bundle exec rails server -p 3000 -b '0.0.0.0' -e production
     depends_on:
       - db
 
@@ -46,14 +46,14 @@ services:
     build:
       context: ./containers/db
     ports:
-      - 3306:3306
+      - ${DB_PORT}:3306
     volumes:
       - db_data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_DATABASE: examin
-      MYSQL_USER: examin
-      MYSQL_PASSWORD: examin
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
 
 volumes:
   db_data: {}
