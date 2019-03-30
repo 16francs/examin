@@ -1,19 +1,17 @@
+CLIENT_REPO=./containers/client
+API_REPO=./containers/api
+CLIENT=cd $(CLIENT_REPO)
+API=cd $(API_REPO)
+
 # 環境構築
 setup:
-	echo "create env file"
 	cp .env.sample .env
 	cp ./env/api.env.sample ./env/api.env
 	cp ./env/client.env.sample ./env/client.env
-	echo "clone client project -> examin_vue"
-	cd ./containers/client
-	git remote add origin https://github.com/16francs/examin_vue.git
-	git pull origin master
-	cd ../../
-	echo "clone api project -> examin_rails"
-	cd ./containers/api
-	git remote add origin https://github.com/16francs/examin_rails.git
-	git pull origin master
-	cd ../../
+	$(CLIENT); git remote add origin https://github.com/16francs/examin_vue.git
+	$(CLIENT); git pull origin master
+	$(API); git remote add origin https://github.com/16francs/examin_rails.git
+	$(API); git pull origin master
 
 ### 開発環境 ###
 # ビルド
@@ -30,9 +28,7 @@ dev-stop:
 
 # テストの実行
 test:
-	echo "client test"
 	docker-compose run --rm client yarn test
-	echo "api test"
 	docker-compose run --rm api bundle exec rails rspec spec
 ##########
 
