@@ -37,17 +37,17 @@ test:
 ### 本番環境 ###
 # ビルド
 build:
-	docker-compose build -f docker-compose.production.yml
+	docker-compose -f docker-compose.production.yml build
 
 # コンテナを起動
 start:
-	docker-compose up -d -f docker-compose.production.yml
+	docker-compose -f docker-compose.production.yml up -d
 
 # コンテナを停止
 stop:
-	docker-compose stop -f docker-compose.production.yml
+	docker-compose -f docker-compose.production.yml stop
 
 # ログの閲覧
 log:
-	docker-compose logs -f
+	docker-compose -f docker-compose.production.yml logs
 ##########
