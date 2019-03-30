@@ -48,6 +48,6 @@ stop:
 	docker-compose -f docker-compose.production.yml stop
 
 # ログの閲覧
-log:
+logs:
 	docker-compose -f docker-compose.production.yml logs
 ##########
