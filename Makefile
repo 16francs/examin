@@ -11,6 +11,7 @@ setup:
 	$(CLIENT); git init
 	$(CLIENT); git remote add origin https://github.com/16francs/examin_vue.git
 	$(CLIENT); git pull origin master
+	$(CLIENT); cp ./docker/Dockerfile ./
 	$(API); git init
 	$(API); git remote add origin https://github.com/16francs/examin_rails.git
 	$(API); git pull origin master
