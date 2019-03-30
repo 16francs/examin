@@ -14,7 +14,7 @@ services:
 
   client:
     build:
-      context: ./containers/client/docker
+      context: ./containers/client
     ports:
       - ${CLIENT_PORT}:3000
     volumes:
@@ -54,6 +54,7 @@ services:
       MYSQL_DATABASE: examin
       MYSQL_USER: ${DATABASE_USER}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
 
 volumes:
   db_data: {}
