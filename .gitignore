@@ -1,6 +1,8 @@
 # dotenv environment variables file
 .env
 !.env.sample
+/env
+!/env/*.sample
 
 # IDE
 .idea
