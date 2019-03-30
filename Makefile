@@ -6,13 +6,11 @@ setup:
 	cp ./env/client.env.sample ./env/client.env
 	echo "clone client project -> examin_vue"
 	cd ./containers/client
-	git init
 	git remote add origin https://github.com/16francs/examin_vue.git
 	git pull origin master
 	cd ../../
 	echo "clone api project -> examin_rails"
 	cd ./containers/api
-	git init
 	git remote add origin https://github.com/16francs/examin_rails.git
 	git pull origin master
 	cd ../../
@@ -51,7 +49,7 @@ start:
 stop:
 	docker-compose stop -f docker-compose.production.yml
 
-# ログの取得
+# ログの閲覧
 log:
 	docker-compose logs -f
 ##########
