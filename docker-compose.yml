@@ -11,6 +11,7 @@ services:
     restart: always
     depends_on:
       - client
+      - api
 
   client:
     build:
